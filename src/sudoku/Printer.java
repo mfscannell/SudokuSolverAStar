@@ -1,15 +1,5 @@
 package sudoku;
 
-/* ----------------------------------------------------------------------------
-
-                      A* Sudoku Solver --> Printer.java
-
-This class creates the Printer object that has the printSudoku method
-which accepts a Sudoku board as a 2-dimensional array and produces a 
-well-formatted output.
-
-*  ----------------------------------------------------------------------------     
-*/
 public class Printer {
     public Printer() {}
     
