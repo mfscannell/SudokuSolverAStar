@@ -2,7 +2,7 @@ package sudoku;
 import java.util.ArrayList;
 import java.util.List;
 
-public class State {
+public class SudokuPuzzle {
 
     // A* Variables 
     private int gAStar = 0;
@@ -10,12 +10,11 @@ public class State {
     private final Printer printer = new Printer();
     
     private int[][] board;
+    private List<SudokuPuzzle> children;
     
-    // Children State Functions
-    private List<State> children = null;
-    
-    public State(State parent) {
+    public SudokuPuzzle(SudokuPuzzle parent) {
         this.board = new int[9][9];
+        this.children = new ArrayList<SudokuPuzzle>();
         
         if (parent != null) {
             int[][] parentSudoku = parent.getBoard();
@@ -50,7 +49,7 @@ public class State {
         return Integer.toString(this.hashCode());
     }
     
-    public List<State> getChildren() {
+    public List<SudokuPuzzle> getChildren() {
         return children;
     }
     
@@ -59,26 +58,38 @@ public class State {
     }
     
     public String toString() {
-        return printer.printSudoku(board);
+        String toBePrinted = Printer.lineSeparator();
+        
+        for (int i = 0; i < 9; i++) {
+            toBePrinted += "|";
+            
+            for (int j = 0; j < 9; j++) {
+                toBePrinted += String.format("%2s", board[i][j]);
+                toBePrinted += Printer.boxSeparator(j);     
+            }
+  
+            toBePrinted += "\n";
+            
+            if (i != 0 && ((i + 1) % 3 == 0)) {
+                toBePrinted += Printer.lineSeparator();
+            }
+        }
+        
+        return toBePrinted;
     }
     
     public boolean isValid() {
-        return isValid(board);
+        return isEachRowValid() && isEachColumnValid() && isEachSubBoxValid();
     }
     
     //Sets value of row and column in Sudoku board
-    public void setNumber(int row, int column, int value) {
+    private void setNumber(int row, int column, int value) {
         try {
             board[row][column] = value; 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("row " + row + " column " + column + " value " + value);
             throw e;
         }
-    }
-    
-    //Gets number in row and column in Sudoku board
-    public int getNumber(int row, int column) {
-        return board[row][column];
     }
     
     //Loads Sudoku from string, values should be separated by ','
@@ -103,8 +114,7 @@ public class State {
                 //ignoring
             }
             
-            // place toBeAdded at the proper row and column
-            setNumber(row, column, toBeAdded);
+            board[row][column] = toBeAdded;
             column++;
             
             //After using up all the 9 columns, go to next row and start at column 0.
@@ -113,7 +123,7 @@ public class State {
                 column = 0;     
             }
         }
-        getHeuristic();
+        calcHeuristic();
     }
    
     /*************** Heuristic Function *********************
@@ -125,7 +135,7 @@ public class State {
     *   current state is set to the heuristic value and it is
     *   returned to the caller as well.
     */
-    public double getHeuristic() {
+    private double calcHeuristic() {
         int counter = 0;
         
         for (int row = 0; row < 9; row++) {
@@ -138,10 +148,6 @@ public class State {
         
         hAStar = counter;
         return counter;
-    }
-    
-    private boolean isValid(final int[][] board) {
-        return (isEachRowValid() && isEachColumnValid() && isEachSubBoxValid());
     }
     
     private boolean isEachRowValid() {
@@ -229,7 +235,7 @@ public class State {
     public boolean isSolved(final int[][] board) {
         boolean solved = true;
         
-        if (isValid(board)) {
+        if (isValid()) {
             for (int row = 0; row < 9 && solved; row++) {
                 for (int column = 0; column < 9 && solved; column++) {
                     if (board[row][column] == 0) {
@@ -257,18 +263,14 @@ public class State {
             }
         }
         
-        List<State> children = new ArrayList<>();
-        
-        for (int k = 0; k < 9; k++) {
-            State child = new State(this);
-            child.setNumber(row, column, (k + 1));
+        for (int k = 1; k <= 9; k++) {
+            SudokuPuzzle child = new SudokuPuzzle(this);
+            child.setNumber(row, column, k);
             
             if (child.isValid()) {
-                child.getHeuristic();
-                children.add(child);
+                child.calcHeuristic();
+                this.children.add(child);
             }
-            
-            this.children = children;
         }
     }
 }
