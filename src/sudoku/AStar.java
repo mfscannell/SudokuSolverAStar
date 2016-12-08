@@ -54,9 +54,7 @@ public class AStar {
                 break; 
             }
 
-            if (!unexploredStates.isEmpty()) {
-                currentState = unexploredStates.poll();
-            }
+            currentState = unexploredStates.poll();
         }
         
         if (currentState.isGoalState()) {
