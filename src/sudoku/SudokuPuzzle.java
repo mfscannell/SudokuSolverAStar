@@ -2,7 +2,7 @@ package sudoku;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SudokuPuzzle {
+public class SudokuPuzzle implements AStarProblem {
 
     // A* Variables 
     private int gAStar = 0;
@@ -12,17 +12,26 @@ public class SudokuPuzzle {
     private int[][] board;
     private List<SudokuPuzzle> children;
     
+    public SudokuPuzzle(String board) {
+        this.board = new int[9][9];
+        this.children = new ArrayList<SudokuPuzzle>();
+        this.gAStar = 0;
+        
+        this.loadSudokuFromString(board);
+        this.calcHeuristic();
+    }
+    
     public SudokuPuzzle(SudokuPuzzle parent) {
         this.board = new int[9][9];
         this.children = new ArrayList<SudokuPuzzle>();
+        this.gAStar = parent.getG();
+        this.hAStar = parent.getH();
         
-        if (parent != null) {
-            int[][] parentSudoku = parent.getBoard();
-            
-            for (int row = 0; row < 9; row++) {
-                for (int column = 0; column < 9; column++) {
-                    this.board[row][column] = parentSudoku[row][column];
-                }
+        int[][] parentSudoku = parent.getBoard();
+        
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                this.board[row][column] = parentSudoku[row][column];
             }
         }
     }
@@ -93,7 +102,7 @@ public class SudokuPuzzle {
     }
     
     //Loads Sudoku from string, values should be separated by ','
-    public void loadSudokuFromString(String sudokuData) {
+    private void loadSudokuFromString(String sudokuData) {
         if (sudokuData == null) {
             throw new NullPointerException();
         }
@@ -123,7 +132,6 @@ public class SudokuPuzzle {
                 column = 0;     
             }
         }
-        calcHeuristic();
     }
    
     /*************** Heuristic Function *********************
