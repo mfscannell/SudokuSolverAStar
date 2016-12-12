@@ -62,7 +62,7 @@ public class Solver {
 
         startTime = System.currentTimeMillis();
         System.out.println("\n\n\tWorking...");
-        SudokuPuzzle solutionState = AStar.findSolutionIntermediate(startState);
+        AStarProblem solutionState = AStar.findSolution(startState);
         endTime = System.currentTimeMillis();
                 
         if (solutionState != null) {
