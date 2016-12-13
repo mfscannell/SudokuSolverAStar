@@ -10,11 +10,9 @@ public class SudokuPuzzle implements AStarProblem {
     private final Printer printer = new Printer();
     
     private int[][] board;
-    private List<AStarProblem> children;
     
     public SudokuPuzzle(String board) {
         this.board = new int[9][9];
-        this.children = new ArrayList<AStarProblem>();
         this.gAStar = 0;
         
         this.loadSudokuFromString(board);
@@ -23,7 +21,6 @@ public class SudokuPuzzle implements AStarProblem {
     
     public SudokuPuzzle(SudokuPuzzle parent) {
         this.board = new int[9][9];
-        this.children = new ArrayList<AStarProblem>();
         this.gAStar = parent.getG();
         this.hAStar = parent.getH();
         
@@ -58,10 +55,6 @@ public class SudokuPuzzle implements AStarProblem {
         return Integer.toString(this.hashCode());
     }
     
-    public List<AStarProblem> getChildren() {
-        return children;
-    }
-    
     public int[][] getBoard() {
         return board;
     }
@@ -94,7 +87,8 @@ public class SudokuPuzzle implements AStarProblem {
     //Sets value of row and column in Sudoku board
     private void setNumber(int row, int column, int value) {
         try {
-            board[row][column] = value; 
+            board[row][column] = value;
+            this.gAStar++;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("row " + row + " column " + column + " value " + value);
             throw e;
@@ -244,6 +238,11 @@ public class SudokuPuzzle implements AStarProblem {
         return duplicatePresent;
     }
 
+    /**
+     * 
+     * @param board
+     * @return
+     */
     public boolean isSolved(final int[][] board) {
         boolean solved = true;
         
@@ -262,7 +261,12 @@ public class SudokuPuzzle implements AStarProblem {
         return solved;
     }
     
-    public void buildChildren() {
+    /***
+     * Gets a list of children puzzles.
+     */
+    public List<AStarProblem> getValidChildren() {
+        List<AStarProblem> children = new ArrayList<AStarProblem>();
+        
         int row = 0;
         int column = 0;
         
@@ -281,8 +285,10 @@ public class SudokuPuzzle implements AStarProblem {
             
             if (child.isValid()) {
                 child.calcHeuristic();
-                this.children.add(child);
+                children.add(child);
             }
         }
+        
+        return children;
     }
 }

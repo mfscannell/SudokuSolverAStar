@@ -11,9 +11,7 @@ public interface AStarProblem {
     
     public abstract boolean isGoalState();
     
-    public abstract void buildChildren();
-    
-    public abstract List<AStarProblem> getChildren();
+    public abstract List<AStarProblem> getValidChildren();
     
     public abstract String getHashCode();
 }

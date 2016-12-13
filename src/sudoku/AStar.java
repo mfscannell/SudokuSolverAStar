@@ -16,9 +16,7 @@ public class AStar {
         Map<String, AStarProblem> exploredStates = new HashMap<String, AStarProblem>();
 
         while (!currentState.isGoalState()) {
-            currentState.buildChildren();
-              
-            List<AStarProblem> children = currentState.getChildren();
+            List<AStarProblem> children = currentState.getValidChildren();
               
             for (AStarProblem child : children) {
                 if (!exploredStates.containsKey(child.getHashCode())) {
@@ -28,7 +26,6 @@ public class AStar {
                         boolean isNewBetter = false;
                         AStarProblem theExisting = null;
         
-                        //finding existing in the frontier set
                         for (AStarProblem existing : unexploredStates) {
                             if (existing.equals(child)) {
                                 if (child.getG() < existing.getG()) {
@@ -54,9 +51,7 @@ public class AStar {
                 break; 
             }
 
-            if (!unexploredStates.isEmpty()) {
-                currentState = unexploredStates.poll();
-            }
+            currentState = unexploredStates.poll();
         }
         
         if (currentState.isGoalState()) {
