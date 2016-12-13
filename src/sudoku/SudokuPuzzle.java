@@ -124,6 +124,10 @@ public class SudokuPuzzle implements AStarProblem {
             }
             
             board[row][column] = toBeAdded;
+            
+            if (toBeAdded > 0) {
+                this.gAStar++;
+            }
             column++;
             
             //After using up all the 9 columns, go to next row and start at column 0.

@@ -58,7 +58,7 @@ public class Solver {
             System.exit(0);
         }
     
-        SudokuPuzzle startState = new SudokuPuzzle(finalInput);
+        AStarProblem startState = new SudokuPuzzle(finalInput);
         //startState.loadSudokuFromString(finalInput);
 
         startTime = System.currentTimeMillis();
