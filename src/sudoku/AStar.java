@@ -19,8 +19,13 @@ public class AStar {
             currentState.buildChildren();
               
             List<AStarProblem> children = currentState.getChildren();
+            System.out.println("----------------------------------");
+            System.out.println("Current State:");
+            System.out.println(currentState.toString());
               
             for (AStarProblem child : children) {
+                //System.out.println("child");
+                //System.out.println(child.toString());
                 if (!exploredStates.containsKey(child.getHashCode())) {
                     if (!unexploredStates.contains(child)) {
                         unexploredStates.add(child);
