@@ -33,6 +33,35 @@ public class SudokuPuzzle implements AStarProblem {
         }
     }
     
+    /**
+     * Creates a new instance of a sudoku puzzle.
+     */
+    public SudokuPuzzle() {
+        this.board = new int[9][9];
+        this.gAStar = 0;
+        this.hAStar = 81;
+    }
+    
+    /**
+     * Creates a new instance of a sudoku puzzle.
+     * @param board  An array representing the numbers on a board.
+     */
+    public SudokuPuzzle(int[][] board) {
+        this.board = new int[9][9];
+        this.gAStar = 0;
+        this.hAStar = 81;
+        
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                this.board[row][column] = board[row][column];
+                if (board[row][column] > 0) {
+                    this.gAStar++;
+                    this.hAStar--;
+                }
+            }
+        }
+    }
+    
     // Value of g : Cost of reaching this state from the initial state. 
     public int getG() {
         return gAStar;
