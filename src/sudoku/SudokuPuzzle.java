@@ -10,11 +10,11 @@ public class SudokuPuzzle implements AStarProblem {
     private final Printer printer = new Printer();
     
     private int[][] board;
-    private List<SudokuPuzzle> children;
+    private List<AStarProblem> children;
     
     public SudokuPuzzle(String board) {
         this.board = new int[9][9];
-        this.children = new ArrayList<SudokuPuzzle>();
+        this.children = new ArrayList<AStarProblem>();
         this.gAStar = 0;
         
         this.loadSudokuFromString(board);
@@ -23,7 +23,7 @@ public class SudokuPuzzle implements AStarProblem {
     
     public SudokuPuzzle(SudokuPuzzle parent) {
         this.board = new int[9][9];
-        this.children = new ArrayList<SudokuPuzzle>();
+        this.children = new ArrayList<AStarProblem>();
         this.gAStar = parent.getG();
         this.hAStar = parent.getH();
         
@@ -58,7 +58,7 @@ public class SudokuPuzzle implements AStarProblem {
         return Integer.toString(this.hashCode());
     }
     
-    public List<SudokuPuzzle> getChildren() {
+    public List<AStarProblem> getChildren() {
         return children;
     }
     

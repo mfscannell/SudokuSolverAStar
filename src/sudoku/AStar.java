@@ -9,27 +9,27 @@ import java.util.Queue;
 
 
 public class AStar {
-    public static SudokuPuzzle findSolutionIntermediate(SudokuPuzzle startState) {
-        SudokuPuzzle currentState = startState;
-        SudokuPuzzle solution = null;
-        Queue<SudokuPuzzle> unexploredStates = new LinkedList<SudokuPuzzle>();
-        Map<String, SudokuPuzzle> exploredStates = new HashMap<String, SudokuPuzzle>();
+    public static AStarProblem findSolutionIntermediate(AStarProblem startState) {
+        AStarProblem currentState = startState;
+        AStarProblem solution = null;
+        Queue<AStarProblem> unexploredStates = new LinkedList<AStarProblem>();
+        Map<String, AStarProblem> exploredStates = new HashMap<String, AStarProblem>();
 
         while (!currentState.isGoalState()) {
             currentState.buildChildren();
               
-            List<SudokuPuzzle> children = currentState.getChildren();
+            List<AStarProblem> children = currentState.getChildren();
               
-            for (SudokuPuzzle child : children) {
+            for (AStarProblem child : children) {
                 if (!exploredStates.containsKey(child.getHashCode())) {
                     if (!unexploredStates.contains(child)) {
                         unexploredStates.add(child);
                     } else {
                         boolean isNewBetter = false;
-                        SudokuPuzzle theExisting = null;
+                        AStarProblem theExisting = null;
         
                         //finding existing in the frontier set
-                        for (SudokuPuzzle existing : unexploredStates) {
+                        for (AStarProblem existing : unexploredStates) {
                             if (existing.equals(child)) {
                                 if (child.getG() < existing.getG()) {
                                     isNewBetter = true;
