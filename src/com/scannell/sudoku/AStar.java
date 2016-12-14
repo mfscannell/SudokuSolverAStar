@@ -1,4 +1,4 @@
-package sudoku;
+package com.scannell.sudoku;
 
 import java.util.HashMap;
 import java.util.LinkedList;
