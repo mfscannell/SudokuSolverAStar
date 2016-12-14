@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Queue;
 
 
-public class AStar {
-    public static AStarProblem findSolutionIntermediate(AStarProblem startState) {
+public class AStarProblemSolver {
+    public static AStarProblem findSolution(AStarProblem startState) {
         AStarProblem currentState = startState;
         AStarProblem solution = null;
         Queue<AStarProblem> unexploredStates = new LinkedList<AStarProblem>();
