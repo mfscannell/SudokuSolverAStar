@@ -1,4 +1,4 @@
-package unitTest.sudoku;
+package unitTest.com.scannell.sudoku;
 
 import static org.junit.Assert.*;
 
