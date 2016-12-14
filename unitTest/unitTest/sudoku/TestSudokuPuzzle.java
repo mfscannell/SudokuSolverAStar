@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import sudoku.AStarProblem;
-import sudoku.SudokuPuzzle;
+import com.scannell.sudoku.AStarProblem;
+import com.scannell.sudoku.SudokuPuzzle;
 
 public class TestSudokuPuzzle {
 

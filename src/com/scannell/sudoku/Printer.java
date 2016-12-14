@@ -1,4 +1,4 @@
-package sudoku;
+package com.scannell.sudoku;
 
 public class Printer {
     public Printer() {}
