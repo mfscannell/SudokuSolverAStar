@@ -1,8 +1,5 @@
 package com.scannell.sudoku;
 
-import java.util.Scanner;
-import java.io.*;
-
 public class Solver {
     public static void main(String[] args) {
         String inputFilePath = SudokuFileReader.queryFileName();

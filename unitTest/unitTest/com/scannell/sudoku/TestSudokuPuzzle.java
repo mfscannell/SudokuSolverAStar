@@ -31,114 +31,114 @@ public class TestSudokuPuzzle {
     
     @Test
     public void TestGetGEmptyPuzzle() {
-       String text = "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0,";
+       int[][] board = {
+               {0, 0, 0, 0, 0, 0, 0, 0, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0}
+       };
        
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0";
-       
-       AStarProblem sudokuPuzzle = new SudokuPuzzle(text);
+       AStarProblem sudokuPuzzle = new SudokuPuzzle(board);
        
        assertSame(0, sudokuPuzzle.getG());
     }
 
     @Test
     public void TestGetGIncompletePuzzle() {
-       String text = "0,9,3,0,0,0,0,0,0,";
-       text = text + "5,0,8,6,0,4,0,0,7,";
-       text = text + "0,0,4,0,9,3,1,0,0,";
+       int[][] board = {
+               {1, 0, 2, 0, 0, 0, 0, 0, 0},
+               {0, 3, 0, 4, 0, 5, 0, 0, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0},
+               {0, 0, 6, 0, 0, 0, 7, 0, 0},
+               {0, 0, 0, 0, 8, 0, 0, 9, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0},
+               {0, 1, 0, 2, 0, 0, 0, 0, 0},
+               {0, 0, 3, 0, 0, 0, 0, 0, 0},
+               {0, 0, 0, 0, 0, 0, 0, 0, 0}
+       };
        
-       text = text + "2,3,0,0,0,8,9,7,0,";
-       text = text + "0,0,0,7,0,2,0,0,0,";
-       text = text + "0,6,7,1,0,0,0,2,5,";
+       AStarProblem sudokuPuzzle = new SudokuPuzzle(board);
        
-       text = text + "0,0,2,9,7,0,4,0,0,";
-       text = text + "8,0,0,3,0,5,7,0,9,";
-       text = text + "0,0,0,0,0,0,2,3,0";
-       
-       AStarProblem sudokuPuzzle = new SudokuPuzzle(text);
-       
-       assertSame(34, sudokuPuzzle.getG());
+       assertSame(12, sudokuPuzzle.getG());
     }
     
     @Test
     public void TestGetGFullPuzzle() {
-       String text = "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9,";
+       int[][] board = {
+               {1, 2, 3, 4, 5, 6, 7, 8, 9},
+               {1, 2, 3, 4, 5, 6, 7, 8, 9},
+               {1, 2, 3, 4, 5, 6, 7, 8, 9},
+               {1, 2, 3, 4, 5, 6, 7, 8, 9},
+               {1, 2, 3, 4, 5, 6, 7, 8, 9},
+               {1, 2, 3, 4, 5, 6, 7, 8, 9},
+               {1, 2, 3, 4, 5, 6, 7, 8, 9},
+               {1, 2, 3, 4, 5, 6, 7, 8, 9},
+               {1, 2, 3, 4, 5, 6, 7, 8, 9}
+       };
        
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9";
-       
-       AStarProblem sudokuPuzzle = new SudokuPuzzle(text);
+       AStarProblem sudokuPuzzle = new SudokuPuzzle(board);
        
        assertSame(81, sudokuPuzzle.getG());
     }
     
     @Test
     public void TestGetHEmptyPuzzle() {
-       String text = "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0,";
+        int[][] board = {
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}
+        };
        
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0,";
-       text = text + "0,0,0,0,0,0,0,0,0";
-       
-       AStarProblem sudokuPuzzle = new SudokuPuzzle(text);
+       AStarProblem sudokuPuzzle = new SudokuPuzzle(board);
        
        assertSame(81, sudokuPuzzle.getH());
     }
 
     @Test
     public void TestGetHIncompletePuzzle() {
-       String text = "0,9,3,0,0,0,0,0,0,";
-       text = text + "5,0,8,6,0,4,0,0,7,";
-       text = text + "0,0,4,0,9,3,1,0,0,";
+        int[][] board = {
+                {1, 0, 2, 0, 0, 0, 0, 0, 0},
+                {0, 3, 0, 4, 0, 5, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 6, 0, 0, 0, 7, 0, 0},
+                {0, 0, 0, 0, 8, 0, 0, 9, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 2, 0, 0, 0, 0, 0},
+                {0, 0, 3, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}
+        };
        
-       text = text + "2,3,0,0,0,8,9,7,0,";
-       text = text + "0,0,0,7,0,2,0,0,0,";
-       text = text + "0,6,7,1,0,0,0,2,5,";
+       AStarProblem sudokuPuzzle = new SudokuPuzzle(board);
        
-       text = text + "0,0,2,9,7,0,4,0,0,";
-       text = text + "8,0,0,3,0,5,7,0,9,";
-       text = text + "0,0,0,0,0,0,2,3,0";
-       
-       AStarProblem sudokuPuzzle = new SudokuPuzzle(text);
-       
-       assertSame(47, sudokuPuzzle.getH());
+       assertSame(69, sudokuPuzzle.getH());
     }
     
     @Test
     public void TestGetHFullPuzzle() {
-       String text = "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9,";
+        int[][] board = {
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {1, 2, 3, 4, 5, 6, 7, 8, 9}
+        };
        
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9,";
-       text = text + "1,2,3,4,5,6,7,8,9";
-       
-       AStarProblem sudokuPuzzle = new SudokuPuzzle(text);
+       AStarProblem sudokuPuzzle = new SudokuPuzzle(board);
        
        assertSame(0, sudokuPuzzle.getH());
     }

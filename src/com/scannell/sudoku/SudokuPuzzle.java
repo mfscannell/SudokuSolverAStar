@@ -3,35 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuPuzzle implements AStarProblem {
-
-    // A* Variables 
     private int gAStar = 0;
     private int hAStar = 0;
-    private final Printer printer = new Printer();
     
     private int[][] board;
-    
-    public SudokuPuzzle(String board) {
-        this.board = new int[9][9];
-        this.gAStar = 0;
-        
-        this.loadSudokuFromString(board);
-        this.calcHeuristic();
-    }
-    
-    public SudokuPuzzle(SudokuPuzzle parent) {
-        this.board = new int[9][9];
-        this.gAStar = parent.getG();
-        this.hAStar = parent.getH();
-        
-        int[][] parentSudoku = parent.getBoard();
-        
-        for (int row = 0; row < 9; row++) {
-            for (int column = 0; column < 9; column++) {
-                this.board[row][column] = parentSudoku[row][column];
-            }
-        }
-    }
     
     /**
      * Creates a new instance of a sudoku puzzle.
@@ -84,10 +59,6 @@ public class SudokuPuzzle implements AStarProblem {
         return Integer.toString(this.hashCode());
     }
     
-    public int[][] getBoard() {
-        return board;
-    }
-    
     public String toString() {
         String toBePrinted = Printer.lineSeparator();
         
@@ -118,71 +89,11 @@ public class SudokuPuzzle implements AStarProblem {
         try {
             board[row][column] = value;
             this.gAStar++;
+            this.hAStar--;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("row " + row + " column " + column + " value " + value);
             throw e;
         }
-    }
-    
-    //Loads Sudoku from string, values should be separated by ','
-    private void loadSudokuFromString(String sudokuData) {
-        if (sudokuData == null) {
-            throw new NullPointerException();
-        }
-
-        board = new int[9][9];
-        int row = 0;
-        int column = 0;
-       
-        // Create an array of 81 pieces of the String separated by commas.
-        String[] tokens = sudokuData.split(",");
-        
-        int toBeAdded = 0;
-        // 81 items to be added to the board and translated to integers.
-        for (int i = 0; i < 81; i++) {
-            try {
-                toBeAdded = Integer.parseInt(tokens[i]);    
-            } catch (NumberFormatException e) {
-                //ignoring
-            }
-            
-            board[row][column] = toBeAdded;
-            
-            if (toBeAdded > 0) {
-                this.gAStar++;
-            }
-            column++;
-            
-            //After using up all the 9 columns, go to next row and start at column 0.
-            if (column == 9) {
-                row = row + 1;
-                column = 0;     
-            }
-        }
-    }
-   
-    /*************** Heuristic Function *********************
-    *   This function is designed to calculate the distance 
-    *   between the current state and the goal state. The 
-    *   function iterates throught the entire board to count
-    *   the number of 0's. The larger the number of 0's the
-    *   further away you are from the solution. The h of the
-    *   current state is set to the heuristic value and it is
-    *   returned to the caller as well.
-    */
-    private double calcHeuristic() {
-        int counter = 0;
-        
-        for (int row = 0; row < 9; row++) {
-            for (int column = 0; column < 9; column++) {
-                if (board[row][column] == 0) {
-                    counter++;
-                }
-            }
-        }
-        
-        hAStar = counter;
-        return counter;
     }
     
     private boolean isEachRowValid() {
@@ -309,11 +220,10 @@ public class SudokuPuzzle implements AStarProblem {
         }
         
         for (int k = 1; k <= 9; k++) {
-            SudokuPuzzle child = new SudokuPuzzle(this);
+            SudokuPuzzle child = new SudokuPuzzle(this.board);
             child.setNumber(row, column, k);
             
             if (child.isValid()) {
-                child.calcHeuristic();
                 children.add(child);
             }
         }
