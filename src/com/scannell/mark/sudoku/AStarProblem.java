@@ -1,4 +1,4 @@
-package com.scannell.sudoku;
+package com.scannell.mark.sudoku;
 
 import java.util.List;
 

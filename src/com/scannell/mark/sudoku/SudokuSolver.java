@@ -1,6 +1,6 @@
-package com.scannell.sudoku;
+package com.scannell.mark.sudoku;
 
-public class Solver {
+public class SudokuSolver {
     public static void main(String[] args) {
         String inputFilePath = SudokuFileReader.queryFileName();
         int[][] board = SudokuFileReader.interpretFile(inputFilePath);

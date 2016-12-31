@@ -1,4 +1,4 @@
-package com.scannell.sudoku;
+package com.scannell.mark.sudoku;
 
 public class Printer {
     public Printer() {}

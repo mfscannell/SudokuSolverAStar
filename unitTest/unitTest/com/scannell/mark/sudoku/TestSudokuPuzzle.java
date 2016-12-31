@@ -1,4 +1,4 @@
-package unitTest.com.scannell.sudoku;
+package unitTest.com.scannell.mark.sudoku;
 
 import static org.junit.Assert.*;
 
@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.scannell.sudoku.AStarProblem;
-import com.scannell.sudoku.SudokuPuzzle;
+import com.scannell.mark.sudoku.AStarProblem;
+import com.scannell.mark.sudoku.SudokuPuzzle;
 
 public class TestSudokuPuzzle {
 

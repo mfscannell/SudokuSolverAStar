@@ -1,4 +1,4 @@
-package com.scannell.sudoku;
+package com.scannell.mark.sudoku;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class SudokuFileReader {
+    /**
+     * Queries the user to enter a file name containing a sudoku puzzle.
+     * @return  The string representing the file path.
+     */
     public static String queryFileName() {
         System.out.print("\n\nPlease enter the name of the file containing the Start State : ");
         Scanner scanner = new Scanner(System.in);
@@ -16,6 +20,11 @@ public class SudokuFileReader {
         return inputFilePath;
     }
     
+    /**
+     * Converts the text in a file to a sudoku board.
+     * @param fileName  The file path containing a sudoku puzzle.
+     * @return  A sudoku puzzle in matrix format.
+     */
     public static int[][] interpretFile(String fileName) {
         int[][] sudokuBoard = new int[9][9];
         
