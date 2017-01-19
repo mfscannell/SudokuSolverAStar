@@ -1,4 +1,4 @@
-package com.scannell.mark.sudoku;
+package com.scannell.mark.artificialIntelligence;
 
 import java.util.List;
 

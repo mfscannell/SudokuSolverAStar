@@ -2,6 +2,8 @@ package com.scannell.mark.sudoku;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.scannell.mark.artificialIntelligence.AStarProblem;
+
 public class SudokuPuzzle implements AStarProblem {
     private int gAStar = 0;
     private int hAStar = 0;
@@ -70,24 +72,31 @@ public class SudokuPuzzle implements AStarProblem {
      * Returns a string representation of the puzzle.
      */
     public String toString() {
-        String toBePrinted = Printer.lineSeparator();
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        stringBuilder.append("+---------+---------+---------+\n");
         
         for (int i = 0; i < 9; i++) {
-            toBePrinted += "|";
+            stringBuilder.append("|");
             
             for (int j = 0; j < 9; j++) {
-                toBePrinted += String.format("%2s", board[i][j]);
-                toBePrinted += Printer.boxSeparator(j);     
+                stringBuilder.append(" ");
+                stringBuilder.append(board[i][j]);
+                stringBuilder.append(" ");
+                
+                if (j == 2 || j == 5 || j == 8) {
+                    stringBuilder.append("|");
+                }
             }
-  
-            toBePrinted += "\n";
             
-            if (i != 0 && ((i + 1) % 3 == 0)) {
-                toBePrinted += Printer.lineSeparator();
+            stringBuilder.append("\n");
+            
+            if (i == 2 || i == 5 || i == 8) {
+                stringBuilder.append("+---------+---------+---------+\n");
             }
         }
         
-        return toBePrinted;
+        return stringBuilder.toString();
     }
     
     /**

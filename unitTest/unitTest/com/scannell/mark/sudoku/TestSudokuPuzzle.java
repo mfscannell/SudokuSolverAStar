@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.scannell.mark.sudoku.AStarProblem;
+import com.scannell.mark.artificialIntelligence.AStarProblem;
 import com.scannell.mark.sudoku.SudokuPuzzle;
 
 public class TestSudokuPuzzle {
